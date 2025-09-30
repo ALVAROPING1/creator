@@ -60,6 +60,11 @@
                   //Load architecture in CREATOR
                   load_arch_select_aux(cfg)
                   {
+                    // wait for wasm to be loaded
+                    if (typeof wasm == "undefined") {
+                      setTimeout(this.load_arch_select_aux, 200, cfg);
+                      return;
+                    }
                     //Load architecture
                     var aux_architecture = cfg;
                     architecture = register_value_deserialize(aux_architecture);

@@ -182,6 +182,11 @@ let wasm;
                   //Load architecture in CREATOR
                   load_arch_select_aux(cfg, load_associated_examples, e)
                   {
+                    // wait for wasm to be loaded
+                    if (typeof wasm == "undefined") {
+                      setTimeout(this.load_arch_select_aux, 200, cfg, load_associated_examples, e);
+                      return;
+                    }
                     //Load architecture
                     var aux_architecture = cfg;
                     architecture = register_value_deserialize(aux_architecture);
