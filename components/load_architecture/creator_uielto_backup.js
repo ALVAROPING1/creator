@@ -49,14 +49,9 @@
                   },
 
                   //Load backup from cache
-                  load_copy()
+                  async load_copy()
                   {
-                    // wait for wasm to be loaded
-                    if (typeof wasm == "undefined") {
-                      setTimeout(this.load_copy, 200);
-                      return;
-                    }
-
+                    await wasm_loader; // wait for wasm to be loaded
                     //Load architecture from cache
                     const arch_json = localStorage.getItem("backup_arch")
                     var aux_architecture = JSON.parse(arch_json);
